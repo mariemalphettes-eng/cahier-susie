@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Le cahier de Susie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  :root {
+    --ink:#4a4256; --creme:#FFF9F0; --card:#ffffff;
+  }
+  body {
+    margin:0; font-family:'Nunito',sans-serif; color:var(--ink);
+    background:
+      radial-gradient(circle, rgba(76,111,227,.10) 1.6px, transparent 1.6px) 0 0/26px 26px,
+      #FFF9F0;
+    min-height:100vh;
+  }
+  .title-font { font-family:'Baloo 2',cursive; }
+  #app { max-width:720px; margin:0 auto; padding:22px 18px 60px; }
+  button { font-family:'Nunito',sans-serif; }
+  .btn {
+    border:none; border-radius:999px; cursor:pointer; font-weight:800; font-family:'Baloo 2',cursive;
+  }
+  .card {
+    background:var(--card); border-radius:26px; box-shadow:0 10px 0 rgba(74,66,86,.05);
+  }
+  .pop { animation:pop .35s ease-out; }
+  @keyframes pop { 0%{transform:scale(.85);opacity:0} 100%{transform:scale(1);opacity:1} }
+  @keyframes wiggle { 0%,100%{transform:rotate(0)} 50%{transform:rotate(-8deg)} }
+  .wiggle { animation:wiggle 1s ease-in-out infinite; }
+  .opt-btn {
+    background:#fff; border:3px solid #EDE0F4; border-radius:16px; padding:14px 16px;
+    font-size:16px; font-weight:700; text-align:left; cursor:pointer; color:var(--ink);
+    transition:transform .1s;
+  }
+  .opt-btn:active { transform:scale(.98); }
+  .top-btn {
+    background:#fff; border:3px solid rgba(0,0,0,.08); border-radius:999px; padding:8px 16px;
+    font-size:14px; font-weight:800; color:var(--ink); cursor:pointer; font-family:'Baloo 2',cursive;
+  }
+  input.answer-input {
+    border:3px solid #E3D3EF; border-radius:14px; padding:11px 14px; font-size:16px; font-weight:700;
+    font-family:'Nunito',sans-serif; flex:1; min-width:0;
+  }
+  .lock { opacity:.55; filter:grayscale(.5); }
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+window.__MATIERES__ = [{"id": "francais", "label": "Français", "emoji": "📖", "mascot": "leo", "tint": "#FF7A5C", "tintSoft": "#FFF0EC", "border": "#FFD0C2", "badgeInk": "#E85F3E", "sections": [{"title": "Nature des mots", "ex": [{"type": "qcm", "q": "Dans « le petit chat dort », quel mot est un adjectif ?", "opts": ["le", "petit", "chat", "dort"], "correct": 1, "exp": "« petit » donne une info sur le nom « chat » : c'est un adjectif."}, {"type": "qcm", "q": "Quelle est la nature du mot « courir » ?", "opts": ["un nom", "un verbe", "un adjectif", "un déterminant"], "correct": 1, "exp": ""}, {"type": "fill", "before": "Le ", "after": " mange une pomme.", "opts": ["garçon", "rapide", "dans"], "correct": 0, "exp": "« garçon » est un nom : il désigne une personne."}, {"type": "qcm", "q": "Parmi ces mots, lequel est un déterminant ?", "opts": ["joli", "les", "manger", "vite"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Dans « elle chante joyeusement », quelle est la nature de « joyeusement » ?", "opts": ["un adjectif", "un adverbe", "un nom", "un verbe"], "correct": 1, "exp": "« joyeusement » se termine par -ment : c'est un adverbe."}, {"type": "fill", "before": "", "after": " enfants jouent dans le jardin.", "opts": ["Les", "Le", "La"], "correct": 0, "exp": ""}, {"type": "qcm", "q": "Quel mot est un pronom dans « Il mange une pomme » ?", "opts": ["Il", "mange", "une", "pomme"], "correct": 0, "exp": ""}, {"type": "calc", "q": "Trouve l'adjectif et écris-le : « Le grand chien aboie. »", "answers": ["grand"], "exp": ""}, {"type": "qcm", "q": "Un nom propre commence toujours par…", "opts": ["une minuscule", "une majuscule", "un chiffre", "un tiret"], "correct": 1, "exp": ""}, {"type": "fill", "before": "Paul et Marie ", "after": " au parc.", "opts": ["joue", "joues", "jouent"], "correct": 2, "exp": "Le sujet est pluriel donc le verbe se termine par -ent."}]}, {"title": "Conjugaison : présent et futur", "ex": [{"type": "fill", "before": "Je ", "after": " (chanter) une chanson.", "opts": ["chante", "chantes", "chantons"], "correct": 0, "exp": ""}, {"type": "qcm", "q": "Quelle est la terminaison de « nous » au présent pour les verbes en -er ?", "opts": ["-ons", "-ez", "-ent", "-es"], "correct": 0, "exp": ""}, {"type": "calc", "q": "Conjugue « avoir » à la 1ère personne du singulier au présent : J' ...", "answers": ["ai"], "exp": ""}, {"type": "calc", "q": "Conjugue « être » à la 3e personne du pluriel au présent : Ils ...", "answers": ["sont"], "exp": ""}, {"type": "fill", "before": "Demain, tu ", "after": " (jouer) au foot.", "opts": ["joues", "joueras", "jouais"], "correct": 1, "exp": "« joueras » est le futur : demain = futur."}, {"type": "qcm", "q": "Quel est l'infinitif du verbe « vont » ?", "opts": ["aller", "avoir", "venir", "voir"], "correct": 0, "exp": ""}, {"type": "calc", "q": "Conjugue « faire » au futur, 1ère personne : Je ...", "answers": ["ferai"], "exp": ""}, {"type": "fill", "before": "", "after": " mangerons une glace ce soir.", "opts": ["Nous", "Vous", "Ils"], "correct": 0, "exp": "« mangerons » se termine par -ons : c'est « nous »."}, {"type": "qcm", "q": "Dans « il finira ses devoirs », à quel temps est le verbe ?", "opts": ["présent", "futur", "passé composé"], "correct": 1, "exp": ""}, {"type": "calc", "q": "Conjugue « aller » au présent, 2e personne du singulier : Tu ...", "answers": ["vas"], "exp": ""}]}, {"title": "Orthographe : homophones et accords", "ex": [{"type": "fill", "before": "Le chien ", "after": " mangé son repas.", "opts": ["a", "à"], "correct": 0, "exp": "« a » = verbe avoir (on peut dire « avait »)."}, {"type": "fill", "before": "Je vais ", "after": " l'école.", "opts": ["a", "à"], "correct": 1, "exp": "« à » est une préposition, on ne peut pas dire « avait »."}, {"type": "fill", "before": "Marie ", "after": " contente.", "opts": ["est", "et"], "correct": 0, "exp": "« est » = verbe être (on peut dire « était »)."}, {"type": "fill", "before": "Il aime le chocolat ", "after": " les bonbons.", "opts": ["est", "et"], "correct": 1, "exp": "« et » relie deux mots."}, {"type": "fill", "before": "Ils ", "after": " partis en vacances.", "opts": ["son", "sont"], "correct": 1, "exp": "« sont » = verbe être."}, {"type": "fill", "before": "", "after": " chien s'appelle Rex.", "opts": ["Son", "Sont"], "correct": 0, "exp": ""}, {"type": "qcm", "q": "Comment écrit-on le pluriel de « un cheval » ?", "opts": ["des chevals", "des chevaux", "des chevales"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Comment écrit-on le pluriel de « un bijou » ?", "opts": ["des bijoux", "des bijous", "des bijoutes"], "correct": 0, "exp": ""}, {"type": "fill", "before": "", "after": " fleurs sont belles.", "opts": ["Ces", "Ses", "C'est"], "correct": 0, "exp": "« Ces » désigne les fleurs qu'on montre."}, {"type": "fill", "before": "Elle a perdu ", "after": " clés.", "opts": ["ces", "ses", "c'est"], "correct": 1, "exp": "« ses » = les clés à elle."}]}, {"title": "Vocabulaire et compréhension", "ex": [{"type": "qcm", "q": "Quel est le synonyme de « content » ?", "opts": ["triste", "joyeux", "fatigué", "malade"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Quel est le contraire de « grand » ?", "opts": ["petit", "large", "haut", "long"], "correct": 0, "exp": ""}, {"type": "qcm", "q": "Quel mot appartient à la famille de « terre » ?", "opts": ["terrasse", "table", "tempête", "tigre"], "correct": 0, "exp": ""}, {"type": "qcm", "q": "Que signifie « un félin » ?", "opts": ["un poisson", "un animal de la famille du chat", "un oiseau", "un reptile"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Quel est le contraire de « rapide » ?", "opts": ["lent", "fort", "joli", "froid"], "correct": 0, "exp": ""}, {"type": "qcm", "q": "Dans « il a englouti son repas », que veut dire « englouti » ?", "opts": ["cuisiné lentement", "mangé très vite", "jeté", "partagé"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Quel mot est un synonyme de « maison » ?", "opts": ["voiture", "habitation", "jardin", "route"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Quel est le contraire de « commencer » ?", "opts": ["continuer", "finir", "débuter", "créer"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Quel mot appartient à la famille de « chanter » ?", "opts": ["chanteur", "champ", "chance", "changer"], "correct": 0, "exp": ""}, {"type": "qcm", "q": "Que veut dire l'expression « avoir le cafard » ?", "opts": ["avoir un insecte", "être triste", "avoir faim", "être en colère"], "correct": 1, "exp": ""}]}]}, {"id": "maths", "label": "Maths", "emoji": "🔢", "mascot": "crayon", "tint": "#E8A23D", "tintSoft": "#FFF6E6", "border": "#FFE1AE", "badgeInk": "#C98423", "sections": [{"title": "Numération", "ex": [{"type": "qcm", "q": "Comment s'écrit en chiffres « douze mille trois cent quatre » ?", "opts": ["12 304", "1 234", "12 340", "123 04"], "correct": 0, "exp": ""}, {"type": "calc", "q": "Écris en chiffres : sept mille cinquante.", "answers": ["7050", "7 050"], "exp": ""}, {"type": "qcm", "q": "Dans le nombre 45 678, quel chiffre représente les milliers ?", "opts": ["4", "5", "6", "7"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Quel nombre est le plus grand ?", "opts": ["9 876", "10 234", "9 999", "10 099"], "correct": 1, "exp": ""}, {"type": "calc", "q": "Parmi 4302, 4230, 4320 : écris le plus petit.", "answers": ["4230"], "exp": ""}, {"type": "qcm", "q": "Combien de centaines y a-t-il dans 3 400 ?", "opts": ["3", "4", "34", "340"], "correct": 2, "exp": ""}, {"type": "calc", "q": "Décompose 528 : 5 centaines, 2 dizaines et ... unités.", "answers": ["8"], "exp": ""}, {"type": "qcm", "q": "Quel est le nombre juste avant 1 000 ?", "opts": ["990", "999", "1001", "900"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Comment s'écrit en lettres le nombre 80 ?", "opts": ["huitante", "quatre-vingts", "huit dix", "quatre-vingt-dix"], "correct": 1, "exp": ""}, {"type": "calc", "q": "Quel est le nombre juste après 6 999 ?", "answers": ["7000", "7 000"], "exp": ""}]}, {"title": "Calcul", "ex": [{"type": "calc", "q": "Combien font 356 + 278 ?", "answers": ["634"], "exp": ""}, {"type": "calc", "q": "Combien font 702 - 345 ?", "answers": ["357"], "exp": ""}, {"type": "calc", "q": "Combien font 7 × 8 ?", "answers": ["56"], "exp": ""}, {"type": "calc", "q": "Combien font 9 × 6 ?", "answers": ["54"], "exp": ""}, {"type": "calc", "q": "Combien font 45 ÷ 5 ?", "answers": ["9"], "exp": ""}, {"type": "calc", "q": "Combien font 24 × 3 ?", "answers": ["72"], "exp": ""}, {"type": "qcm", "q": "Quel est le résultat de 12 × 12 ?", "opts": ["124", "144", "132", "154"], "correct": 1, "exp": ""}, {"type": "calc", "q": "Combien font 500 - 268 ?", "answers": ["232"], "exp": ""}, {"type": "calc", "q": "Combien font 6 × 7 ?", "answers": ["42"], "exp": ""}, {"type": "calc", "q": "Combien font 81 ÷ 9 ?", "answers": ["9"], "exp": ""}]}, {"title": "Fractions et mesures", "ex": [{"type": "qcm", "q": "Que représente 1/2 d'une pizza ?", "opts": ["un quart", "la moitié", "le tiers", "le tout"], "correct": 1, "exp": ""}, {"type": "calc", "q": "Combien font 1/2 + 1/2 ?", "answers": ["1"], "exp": ""}, {"type": "qcm", "q": "Dans la fraction 3/4, quel est le numérateur ?", "opts": ["3", "4", "7", "1"], "correct": 0, "exp": ""}, {"type": "calc", "q": "1 mètre = combien de centimètres ?", "answers": ["100"], "exp": ""}, {"type": "calc", "q": "1 kilogramme = combien de grammes ?", "answers": ["1000", "1 000"], "exp": ""}, {"type": "qcm", "q": "Quelle unité mesure une durée courte, comme un sprint ?", "opts": ["le kilomètre", "la seconde", "le litre", "le gramme"], "correct": 1, "exp": ""}, {"type": "calc", "q": "1 heure = combien de minutes ?", "answers": ["60"], "exp": ""}, {"type": "qcm", "q": "Combien vaut un quart d'heure en minutes ?", "opts": ["10", "15", "20", "30"], "correct": 1, "exp": ""}, {"type": "calc", "q": "Un gâteau est coupé en 8 parts égales. Combien de parts font la moitié du gâteau ?", "answers": ["4"], "exp": ""}, {"type": "qcm", "q": "Quelle est la plus grande longueur ?", "opts": ["1 m", "10 cm", "100 mm", "1 km"], "correct": 3, "exp": ""}]}, {"title": "Géométrie et problèmes", "ex": [{"type": "qcm", "q": "Combien de côtés a un triangle ?", "opts": ["2", "3", "4", "5"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Quelle figure a 4 côtés égaux et 4 angles droits ?", "opts": ["le rectangle", "le carré", "le triangle", "le cercle"], "correct": 1, "exp": ""}, {"type": "calc", "q": "Quel est le périmètre d'un carré de 5 cm de côté ?", "answers": ["20"], "exp": ""}, {"type": "calc", "q": "Un rectangle mesure 6 cm sur 3 cm. Quel est son périmètre ?", "answers": ["18"], "exp": ""}, {"type": "qcm", "q": "Combien d'angles droits a un rectangle ?", "opts": ["1", "2", "3", "4"], "correct": 3, "exp": ""}, {"type": "calc", "q": "Léo achète 3 cahiers à 2 € chacun. Combien paie-t-il en tout ?", "answers": ["6"], "exp": ""}, {"type": "calc", "q": "Une classe de 24 élèves est répartie en 4 groupes égaux. Combien d'élèves par groupe ?", "answers": ["6"], "exp": ""}, {"type": "qcm", "q": "Comment s'appelle une figure dont tous les points sont à égale distance d'un centre ?", "opts": ["le carré", "le cercle", "le losange", "le rectangle"], "correct": 1, "exp": ""}, {"type": "calc", "q": "Un livre coûte 8 €. Combien coûteront 5 livres ?", "answers": ["40"], "exp": ""}, {"type": "calc", "q": "Marie a 15 billes. Elle en gagne 7 puis en perd 4. Combien a-t-elle de billes maintenant ?", "answers": ["18"], "exp": ""}]}]}, {"id": "anglais", "label": "Anglais", "emoji": "🌍", "mascot": "pixie", "tint": "#4A6FE3", "tintSoft": "#ECF0FF", "border": "#C6D3FA", "badgeInk": "#3E5BC4", "sections": [{"title": "Vocabulaire de base", "ex": [{"type": "qcm", "q": "How do you say « rouge » in English?", "opts": ["blue", "red", "green", "yellow"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "What is « le chien » in English?", "opts": ["cat", "dog", "bird", "fish"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "How do you say the number « sept » in English?", "opts": ["six", "seven", "eight", "nine"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "What is « la maman » in English?", "opts": ["mother", "brother", "sister", "father"], "correct": 0, "exp": ""}, {"type": "qcm", "q": "How do you say « bleu » in English?", "opts": ["blue", "black", "brown", "white"], "correct": 0, "exp": ""}, {"type": "qcm", "q": "What is « un oiseau » in English?", "opts": ["a bear", "a bird", "a bee", "a bull"], "correct": 1, "exp": ""}, {"type": "calc", "q": "Écris en anglais le nombre 10.", "answers": ["ten"], "exp": ""}, {"type": "qcm", "q": "What is « le père » in English?", "opts": ["father", "mother", "sister", "son"], "correct": 0, "exp": ""}, {"type": "qcm", "q": "How do you say « vert » in English?", "opts": ["green", "grey", "gold", "great"], "correct": 0, "exp": ""}, {"type": "qcm", "q": "What is « le chat » in English?", "opts": ["cat", "cow", "cap", "cup"], "correct": 0, "exp": ""}]}, {"title": "Se présenter", "ex": [{"type": "fill", "before": "", "after": " Susie.", "opts": ["My name is", "I have"], "correct": 0, "exp": ""}, {"type": "qcm", "q": "Comment dit-on « J'ai 10 ans » en anglais ?", "opts": ["I am 10", "I have 10", "I am 10 years old"], "correct": 2, "exp": ""}, {"type": "fill", "before": "I ", "after": " a little brother.", "opts": ["am", "have", "is"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Comment traduire « Je m'appelle Susie » ?", "opts": ["I am Susie name", "My name is Susie", "I have Susie"], "correct": 1, "exp": ""}, {"type": "fill", "before": "", "after": " happy today.", "opts": ["I am", "I have"], "correct": 0, "exp": ""}, {"type": "qcm", "q": "Comment dit-on « J'aime les chats » ?", "opts": ["I like cats", "I am cats", "I have cats"], "correct": 0, "exp": ""}, {"type": "calc", "q": "Complète : « How old ___ you? »", "answers": ["are"], "exp": ""}, {"type": "qcm", "q": "Comment répondre à « What is your name? » si tu t'appelles Susie ?", "opts": ["My name is Susie", "I am ten", "I have a cat"], "correct": 0, "exp": ""}, {"type": "fill", "before": "She ", "after": " my best friend.", "opts": ["am", "is", "are"], "correct": 1, "exp": ""}, {"type": "calc", "q": "Complète : « I ___ from France. »", "answers": ["am"], "exp": ""}]}, {"title": "Phrases du quotidien", "ex": [{"type": "qcm", "q": "Quel jour vient après « Monday » ?", "opts": ["Sunday", "Tuesday", "Wednesday", "Friday"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Comment dit-on « il pleut » en anglais ?", "opts": ["it's sunny", "it's raining", "it's snowing", "it's windy"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Quel est le premier jour du week-end en anglais ?", "opts": ["Friday", "Saturday", "Sunday", "Monday"], "correct": 1, "exp": ""}, {"type": "fill", "before": "There ", "after": " a cat in the garden.", "opts": ["is", "are"], "correct": 0, "exp": ""}, {"type": "fill", "before": "There ", "after": " three books on the table.", "opts": ["is", "are"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Comment dit-on « il fait beau » ?", "opts": ["it's cold", "it's sunny", "it's raining", "it's dark"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Que veut dire « to walk » ?", "opts": ["courir", "marcher", "sauter", "nager"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Que veut dire « to eat » ?", "opts": ["dormir", "manger", "jouer", "lire"], "correct": 1, "exp": ""}, {"type": "calc", "q": "Traduis en anglais : « le week-end »", "answers": ["weekend", "the weekend"], "exp": ""}, {"type": "qcm", "q": "Comment dit-on « mercredi » en anglais ?", "opts": ["Tuesday", "Wednesday", "Thursday", "Monday"], "correct": 1, "exp": ""}]}, {"title": "Compréhension simple", "ex": [{"type": "qcm", "q": "« Where do you live? » veut dire…", "opts": ["Où habites-tu ?", "Quel âge as-tu ?", "Comment t'appelles-tu ?"], "correct": 0, "exp": ""}, {"type": "qcm", "q": "« How old are you? » veut dire…", "opts": ["Où habites-tu ?", "Quel âge as-tu ?", "Comment vas-tu ?"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Traduis : « I have a dog and a cat. »", "opts": ["J'ai un chien et un chat.", "Je vois un chien et un chat.", "J'aime les chiens et les chats."], "correct": 0, "exp": ""}, {"type": "qcm", "q": "Traduis : « She is my sister. »", "opts": ["Elle est ma sœur.", "Elle est ma mère.", "C'est ma sœur à moi seule."], "correct": 0, "exp": ""}, {"type": "qcm", "q": "Comment demander « Comment vas-tu ? » en anglais ?", "opts": ["How are you?", "What is your name?", "How old are you?"], "correct": 0, "exp": ""}, {"type": "qcm", "q": "Traduis : « We are happy. »", "opts": ["Nous sommes heureux.", "Ils sont heureux.", "Tu es heureux."], "correct": 0, "exp": ""}, {"type": "qcm", "q": "« My favourite colour is blue » veut dire…", "opts": ["Ma couleur préférée est le bleu.", "Mon animal préféré est le bleu.", "Je préfère le bleu marine."], "correct": 0, "exp": ""}, {"type": "qcm", "q": "Traduis : « The sun is shining. »", "opts": ["Le soleil brille.", "Il pleut fort.", "Le vent souffle."], "correct": 0, "exp": ""}, {"type": "qcm", "q": "Comment dit-on « J'ai faim » ?", "opts": ["I am hungry", "I am thirsty", "I am tired"], "correct": 0, "exp": ""}, {"type": "qcm", "q": "Traduis : « I am tired. »", "opts": ["Je suis fatigué.", "Je suis content.", "J'ai froid."], "correct": 0, "exp": ""}]}]}, {"id": "sciences", "label": "Sciences", "emoji": "🔬", "mascot": "nuage", "tint": "#1FA98C", "tintSoft": "#E5FAF5", "border": "#B8ECDF", "badgeInk": "#178570", "sections": [{"title": "Le corps humain", "ex": [{"type": "qcm", "q": "Quel organe fait circuler le sang dans le corps ?", "opts": ["le foie", "le cœur", "l'estomac", "les poumons"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Combien de sens possède le corps humain ?", "opts": ["3", "4", "5", "6"], "correct": 2, "exp": ""}, {"type": "qcm", "q": "Quel organe permet de respirer ?", "opts": ["les poumons", "le cœur", "le cerveau", "l'estomac"], "correct": 0, "exp": ""}, {"type": "qcm", "q": "Quel sens utilise-t-on avec les yeux ?", "opts": ["l'ouïe", "la vue", "le toucher", "l'odorat"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Où se trouve le cerveau ?", "opts": ["dans le thorax", "dans le crâne", "dans l'abdomen", "dans le dos"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Quel organe digère les aliments en premier ?", "opts": ["l'estomac", "le cœur", "les poumons", "les reins"], "correct": 0, "exp": ""}, {"type": "qcm", "q": "Combien d'os compte environ le squelette d'un adulte ?", "opts": ["100", "206", "350", "500"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Quel geste protège des microbes avant de manger ?", "opts": ["se laver les mains", "se brosser les cheveux", "fermer les yeux", "courir"], "correct": 0, "exp": ""}, {"type": "qcm", "q": "Quelle partie du corps protège le cerveau ?", "opts": ["les côtes", "le crâne", "la colonne vertébrale", "le bassin"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Quel organe filtre le sang et fabrique l'urine ?", "opts": ["le foie", "les reins", "les poumons", "le cœur"], "correct": 1, "exp": ""}]}, {"title": "Le vivant", "ex": [{"type": "qcm", "q": "Un animal qui a une colonne vertébrale est un…", "opts": ["invertébré", "vertébré", "mammifère uniquement", "insecte"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Quel animal est un mammifère ?", "opts": ["la grenouille", "le dauphin", "le poisson rouge", "le papillon"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "De quoi une plante a-t-elle besoin pour pousser ?", "opts": ["d'eau, de lumière et d'air", "seulement d'obscurité", "seulement de sable", "de sucre"], "correct": 0, "exp": ""}, {"type": "qcm", "q": "Quel est le premier stade de vie d'une grenouille ?", "opts": ["le têtard", "l'œuf", "la larve adulte", "le criquet"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Qu'est-ce qu'un herbivore ?", "opts": ["un animal qui mange de la viande", "un animal qui mange des plantes", "un animal qui mange de tout", "une plante"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Qu'est-ce qu'un carnivore ?", "opts": ["un animal qui mange des plantes", "un animal qui mange de la viande", "un animal qui ne mange pas", "une plante"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Quel insecte transforme le nectar des fleurs en miel ?", "opts": ["la fourmi", "l'abeille", "le papillon", "la coccinelle"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Comment s'appelle la transformation de la chenille en papillon ?", "opts": ["la reproduction", "la métamorphose", "la digestion", "la photosynthèse"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Quel animal pond des œufs parmi ceux-ci ?", "opts": ["le chien", "la poule", "le chat", "le cheval"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Que permet la photosynthèse à la plante ?", "opts": ["de fabriquer sa nourriture grâce à la lumière", "de fabriquer de l'eau", "de respirer sous l'eau", "de se déplacer"], "correct": 0, "exp": ""}]}, {"title": "Matière et énergie", "ex": [{"type": "qcm", "q": "À quelle température l'eau bout-elle au niveau de la mer ?", "opts": ["0 °C", "50 °C", "100 °C", "200 °C"], "correct": 2, "exp": ""}, {"type": "qcm", "q": "À quelle température l'eau gèle-t-elle ?", "opts": ["0 °C", "10 °C", "-10 °C", "100 °C"], "correct": 0, "exp": ""}, {"type": "qcm", "q": "Quel est l'état de la glace ?", "opts": ["liquide", "solide", "gazeux", "aucun"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Quel est l'état de la vapeur d'eau ?", "opts": ["solide", "liquide", "gazeux"], "correct": 2, "exp": ""}, {"type": "qcm", "q": "Quelle énergie vient directement du soleil ?", "opts": ["l'énergie éolienne", "l'énergie solaire", "l'énergie nucléaire", "l'énergie du charbon"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Quelle énergie utilise la force du vent ?", "opts": ["l'énergie éolienne", "l'énergie solaire", "l'énergie hydraulique"], "correct": 0, "exp": ""}, {"type": "qcm", "q": "Le bois, le fer et le plastique sont…", "opts": ["des animaux", "des matériaux", "des liquides", "des gaz"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Que se passe-t-il quand on mélange de l'eau et de l'huile ?", "opts": ["ils se mélangent bien", "ils ne se mélangent pas", "l'huile disparaît", "l'eau devient huile"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Le sel se dissout-il dans l'eau ?", "opts": ["oui", "non", "seulement dans l'eau chaude", "seulement dans l'eau froide"], "correct": 0, "exp": ""}, {"type": "qcm", "q": "Quel objet est un bon conducteur d'électricité ?", "opts": ["une règle en plastique", "une cuillère en métal", "une gomme", "un crayon en bois"], "correct": 1, "exp": ""}]}, {"title": "Environnement", "ex": [{"type": "qcm", "q": "Dans quelle poubelle jette-t-on en général le papier et le carton pour le recyclage ?", "opts": ["la poubelle de tri sélectif (jaune ou bleue selon les villes)", "la poubelle des ordures ménagères", "la poubelle à verre", "n'importe laquelle"], "correct": 0, "exp": ""}, {"type": "qcm", "q": "Combien y a-t-il de saisons en France ?", "opts": ["2", "3", "4", "5"], "correct": 2, "exp": ""}, {"type": "qcm", "q": "Quelle saison vient après l'hiver ?", "opts": ["l'été", "le printemps", "l'automne"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Qu'est-ce qu'un écosystème ?", "opts": ["un ensemble d'êtres vivants et leur milieu", "une seule plante", "un objet technologique", "une saison"], "correct": 0, "exp": ""}, {"type": "qcm", "q": "Pourquoi faut-il économiser l'eau ?", "opts": ["c'est une ressource précieuse et limitée", "l'eau n'a aucune valeur", "il y en a partout à l'infini", "ce n'est pas important"], "correct": 0, "exp": ""}, {"type": "qcm", "q": "Que peut-on faire pour réduire ses déchets ?", "opts": ["tout jeter à la poubelle", "réutiliser et recycler", "brûler les déchets soi-même", "acheter plus d'emballages"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Quel geste protège la planète au quotidien ?", "opts": ["éteindre la lumière en sortant d'une pièce", "laisser couler l'eau sans raison", "jeter des déchets dans la nature", "gaspiller la nourriture"], "correct": 0, "exp": ""}, {"type": "qcm", "q": "Le verre se recycle-t-il ?", "opts": ["oui, presque à l'infini", "non, jamais", "seulement une fois", "seulement s'il est blanc"], "correct": 0, "exp": ""}, {"type": "qcm", "q": "Qu'est-ce que la déforestation ?", "opts": ["planter des arbres", "détruire les forêts", "protéger les animaux", "arroser les plantes"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Quel animal est menacé si on pollue les océans ?", "opts": ["les tortues marines", "les oiseaux des villes", "les hérissons", "les hiboux"], "correct": 0, "exp": ""}]}]}, {"id": "histgeo", "label": "Histoire-Géo", "emoji": "🏛️", "mascot": "leo", "tint": "#9C5FBE", "tintSoft": "#F5ECFB", "border": "#E1C7EF", "badgeInk": "#7D46A0", "sections": [{"title": "Repères chronologiques", "ex": [{"type": "qcm", "q": "Quelle période vient en premier ?", "opts": ["l'Antiquité", "la Préhistoire", "le Moyen Âge", "les Temps modernes"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Qui étaient les Gaulois ?", "opts": ["les habitants du territoire français avant les Romains", "des chevaliers du Moyen Âge", "des rois de France", "des explorateurs"], "correct": 0, "exp": ""}, {"type": "qcm", "q": "Qui a envahi la Gaule et l'a transformée en province romaine ?", "opts": ["les Vikings", "les Romains", "les Anglais", "les Égyptiens"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "À quelle période vivaient les chevaliers dans des châteaux forts ?", "opts": ["la Préhistoire", "l'Antiquité", "le Moyen Âge", "aujourd'hui"], "correct": 2, "exp": ""}, {"type": "qcm", "q": "Que fabriquaient les hommes de la Préhistoire pour chasser ?", "opts": ["des ordinateurs", "des outils en pierre", "des voitures", "des livres"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Comment appelle-t-on la très longue période avant l'écriture ?", "opts": ["la Préhistoire", "le Moyen Âge", "la Renaissance", "l'époque contemporaine"], "correct": 0, "exp": ""}, {"type": "qcm", "q": "Quel peuple gaulois est resté célèbre pour avoir résisté aux Romains dans une célèbre bande dessinée ?", "opts": ["Astérix et les Gaulois", "les Vikings", "les pharaons", "les chevaliers"], "correct": 0, "exp": ""}, {"type": "qcm", "q": "Que veut dire « un siècle » ?", "opts": ["10 ans", "100 ans", "1000 ans", "1 an"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Quel est l'ordre chronologique correct ?", "opts": ["Moyen Âge, Préhistoire, Antiquité", "Préhistoire, Antiquité, Moyen Âge", "Antiquité, Moyen Âge, Préhistoire"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Que construisaient les seigneurs au Moyen Âge pour se protéger ?", "opts": ["des pyramides", "des châteaux forts", "des gratte-ciels", "des temples"], "correct": 1, "exp": ""}]}, {"title": "La France, mon pays", "ex": [{"type": "qcm", "q": "Quelle est la capitale de la France ?", "opts": ["Lyon", "Marseille", "Paris", "Toulouse"], "correct": 2, "exp": ""}, {"type": "qcm", "q": "Quel fleuve traverse Paris ?", "opts": ["la Loire", "la Seine", "le Rhône", "la Garonne"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Quel est le plus long fleuve de France ?", "opts": ["la Seine", "la Loire", "le Rhône", "la Garonne"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Quelle chaîne de montagnes sépare la France de l'Espagne ?", "opts": ["les Alpes", "les Pyrénées", "le Massif central", "les Vosges"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Quelle est la plus haute montagne de France ?", "opts": ["le Mont Blanc", "le mont Ventoux", "le Puy de Dôme", "le Mont Saint-Michel"], "correct": 0, "exp": ""}, {"type": "qcm", "q": "Quelle mer borde le sud de la France ?", "opts": ["la mer du Nord", "la mer Méditerranée", "l'océan Indien", "la mer Baltique"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Quel océan borde l'ouest de la France ?", "opts": ["l'océan Pacifique", "l'océan Atlantique", "l'océan Indien", "l'océan Arctique"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Combien de couleurs compte le drapeau français ?", "opts": ["2", "3", "4", "5"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Quel est le symbole animal de la France ?", "opts": ["l'aigle", "le coq", "le lion", "l'ours"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Quelle est la devise de la France ?", "opts": ["Paix, Travail, Patrie", "Liberté, Égalité, Fraternité", "Unité, Force, Courage"], "correct": 1, "exp": ""}]}, {"title": "L'Europe et le monde", "ex": [{"type": "qcm", "q": "Le découpage enseigné en primaire compte l'Europe, l'Asie, l'Afrique, l'Amérique et l'Océanie. Combien cela fait-il de continents ?", "opts": ["4", "5", "6", "7"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Quel est le plus grand océan du monde ?", "opts": ["l'océan Atlantique", "l'océan Pacifique", "l'océan Indien", "l'océan Arctique"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Sur quel continent se trouve la France ?", "opts": ["l'Afrique", "l'Asie", "l'Europe", "l'Amérique"], "correct": 2, "exp": ""}, {"type": "qcm", "q": "Lequel de ces pays ne partage PAS de frontière terrestre avec la France ?", "opts": ["l'Espagne", "l'Allemagne", "le Portugal", "la Belgique"], "correct": 2, "exp": ""}, {"type": "qcm", "q": "Quelle est la planète sur laquelle nous vivons ?", "opts": ["Mars", "la Terre", "Vénus", "Jupiter"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Qu'est-ce qui tourne autour du Soleil dans notre système solaire ?", "opts": ["les planètes, dont la Terre", "seulement la Lune", "rien, tout est fixe", "seulement les étoiles"], "correct": 0, "exp": ""}, {"type": "qcm", "q": "Combien de temps la Terre met-elle environ pour faire un tour complet sur elle-même ?", "opts": ["1 heure", "24 heures", "1 semaine", "1 mois"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Qu'est-ce qui tourne autour de la Terre ?", "opts": ["le Soleil", "la Lune", "Mars", "Jupiter"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Quel est le plus grand pays du monde par sa superficie ?", "opts": ["la Chine", "les États-Unis", "la Russie", "le Canada"], "correct": 2, "exp": ""}, {"type": "qcm", "q": "Quelle langue parle-t-on principalement en Espagne ?", "opts": ["l'espagnol", "le portugais", "l'italien", "l'anglais"], "correct": 0, "exp": ""}]}, {"title": "Repères et symboles", "ex": [{"type": "qcm", "q": "Que symbolise Marianne pour la France ?", "opts": ["la royauté", "la République française", "l'armée", "l'Europe"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Quel est l'hymne national de la France ?", "opts": ["La Marseillaise", "L'Internationale", "Le God Save the King", "L'Ode à la joie"], "correct": 0, "exp": ""}, {"type": "qcm", "q": "Quelle date célèbre la fête nationale française ?", "opts": ["le 1er mai", "le 14 juillet", "le 11 novembre", "le 25 décembre"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Que rappelle le 14 juillet ?", "opts": ["la prise de la Bastille en 1789", "la fin de la Première Guerre mondiale", "Noël", "la fête du Travail"], "correct": 0, "exp": ""}, {"type": "qcm", "q": "Qui dirige la République française aujourd'hui ?", "opts": ["un roi", "un président de la République", "un empereur", "un duc"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Quel monument célèbre se trouve à Paris ?", "opts": ["le Colisée", "la tour Eiffel", "la Sagrada Familia", "Big Ben"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Qu'est-ce que l'Union européenne ?", "opts": ["un pays", "un regroupement de pays européens", "une ville", "une montagne"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Quelle monnaie utilise-t-on en France ?", "opts": ["le franc", "l'euro", "le dollar", "la livre"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Que veut dire « République » ?", "opts": ["le pouvoir appartient à un roi", "le pouvoir appartient au peuple, via ses représentants élus", "le pouvoir appartient à l'armée", "aucune règle"], "correct": 1, "exp": ""}, {"type": "qcm", "q": "Le 11 novembre commémore…", "opts": ["la fin de la Première Guerre mondiale (1918)", "la Révolution française", "la fête de la musique", "Halloween"], "correct": 0, "exp": ""}]}]}];
+</script>
+<script>
+(function(){
+
+var PRENOM = "Susie";
+var STORAGE_KEY = "cahier_susie_cm1_v1";
+var UNLOCK_THRESHOLD = 8;
+
+function loadState(){
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch(e){ return {}; }
+}
+function saveState(s){
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(s)); } catch(e){}
+}
+var state = loadState();
+// state shape: { answers: { <exId>: {sel|draft, status} }, view: 'home', matiereId, sectionIdx }
+if (!state.answers) state.answers = {};
+if (!state.view) state.view = 'home';
+
+function persist(){ saveState(state); }
+
+function norm(s){
+  return String(s==null ? '' : s).toString().trim().toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/\s+/g,' ').replace(/€/g,'');
+}
+
+function exId(mIdx, sIdx, eIdx){ return 'm'+mIdx+'_s'+sIdx+'_e'+eIdx; }
+
+function isDone(ex, ans){
+  if (!ans) return false;
+  if (ex.type === 'qcm' || ex.type === 'fill') return ans.sel === ex.correct;
+  if (ex.type === 'calc') return ans.status === 'correct';
+  return false;
+}
+
+function sectionScore(mIdx, sIdx){
+  var m = window.__MATIERES__[mIdx], sec = m.sections[sIdx];
+  var n = 0;
+  sec.ex.forEach(function(ex, eIdx){
+    var id = exId(mIdx, sIdx, eIdx);
+    if (isDone(ex, state.answers[id])) n++;
+  });
+  return n;
+}
+
+function sectionAttempted(mIdx, sIdx){
+  var m = window.__MATIERES__[mIdx], sec = m.sections[sIdx];
+  var n = 0;
+  sec.ex.forEach(function(ex, eIdx){
+    var id = exId(mIdx, sIdx, eIdx);
+    var a = state.answers[id];
+    if (a && (a.sel != null || a.status)) n++;
+  });
+  return n;
+}
+
+function sectionUnlocked(mIdx, sIdx){
+  if (sIdx === 0) return true;
+  return sectionScore(mIdx, sIdx-1) >= UNLOCK_THRESHOLD;
+}
+
+function matiereFullyDone(mIdx){
+  var m = window.__MATIERES__[mIdx];
+  for (var i=0;i<m.sections.length;i++){
+    if (sectionScore(mIdx, i) < UNLOCK_THRESHOLD) return false;
+  }
+  return true;
+}
+
+function totalStars(){
+  var n = 0;
+  window.__MATIERES__.forEach(function(m, mIdx){
+    m.sections.forEach(function(sec, sIdx){ n += sectionScore(mIdx, sIdx); });
+  });
+  return n;
+}
+function totalMax(){
+  var n = 0;
+  window.__MATIERES__.forEach(function(m){ m.sections.forEach(function(sec){ n += sec.ex.length; }); });
+  return n;
+}
+
+function go(view, matiereId, sectionIdx){
+  state.view = view;
+  state.matiereId = matiereId != null ? matiereId : null;
+  state.sectionIdx = sectionIdx != null ? sectionIdx : null;
+  persist();
+  window.scrollTo({top:0, behavior:'instant'});
+  render();
+}
+
+function resetAll(){
+  if (!confirm('Recommencer tout le cahier depuis le début ? Ta progression sera effacée.')) return;
+  state.answers = {};
+  persist();
+  render();
+}
+
+/* ---------- Mascottes (dessinées en CSS) ---------- */
+function mascotHTML(name, size, mood){
+  size = size || 84;
+  var scale = size/100;
+  var inner = '';
+  if (name === 'leo'){
+    inner += '<div style="position:absolute;left:50%;top:1px;width:3px;height:13px;background:#B79BE8;transform:translateX(-50%);border-radius:2px;"></div>'+
+      '<div style="position:absolute;left:50%;top:-6px;width:12px;height:12px;background:#FF6BAA;border-radius:50%;transform:translateX(-50%);box-shadow:0 0 0 3px #fff;"></div>'+
+      '<div style="position:absolute;left:3px;top:44px;width:12px;height:22px;background:#DCC6FF;border-radius:8px;border:3px solid #C9B8F0;"></div>'+
+      '<div style="position:absolute;right:3px;top:44px;width:12px;height:22px;background:#DCC6FF;border-radius:8px;border:3px solid #C9B8F0;"></div>'+
+      '<div style="position:absolute;left:50%;bottom:1px;transform:translateX(-50%);width:48px;height:18px;border-radius:12px 12px 9px 9px;background:linear-gradient(#f4f0ff,#e5ddf7);border:3px solid #CBBBEF;border-bottom:none;"></div>'+
+      '<div style="position:absolute;left:50%;top:15px;transform:translateX(-50%);width:78px;height:60px;border-radius:23px;background:linear-gradient(#ffffff,#eef1fb);border:3px solid #CBBBEF;">'+
+        '<div style="position:absolute;left:7px;top:36px;width:11px;height:8px;background:#FFB8D2;border-radius:50%;opacity:.85;"></div>'+
+        '<div style="position:absolute;right:7px;top:36px;width:11px;height:8px;background:#FFB8D2;border-radius:50%;opacity:.85;"></div>'+
+        '<div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:56px;height:40px;border-radius:14px;background:radial-gradient(circle at 50% 32%, #3b3168, #211b41);">'+
+          '<div style="position:absolute;left:12px;top:11px;width:9px;height:14px;background:#63E6DE;border-radius:6px;box-shadow:0 0 6px rgba(99,230,222,.7);"></div>'+
+          '<div style="position:absolute;right:12px;top:11px;width:9px;height:14px;background:#63E6DE;border-radius:6px;box-shadow:0 0 6px rgba(99,230,222,.7);"></div>'+
+          '<div style="position:absolute;left:50%;bottom:7px;transform:translateX(-50%);width:17px;height:9px;border:2.5px solid #63E6DE;border-top:none;border-radius:0 0 11px 11px;"></div>'+
+        '</div>'+
+      '</div>';
+  } else if (name === 'nuage'){
+    inner += '<div style="position:absolute;left:14px;top:22px;width:34px;height:34px;background:#fff;border-radius:50%;box-shadow:inset 0 0 0 3px #CFE4FF;z-index:0;"></div>'+
+      '<div style="position:absolute;right:12px;top:20px;width:38px;height:38px;background:#fff;border-radius:50%;box-shadow:inset 0 0 0 3px #CFE4FF;z-index:0;"></div>'+
+      '<div style="position:absolute;left:50%;top:34px;transform:translateX(-50%);width:86px;height:52px;background:#fff;border:3px solid #CFE4FF;border-radius:44px 44px 40px 40px;z-index:1;">'+
+        '<div style="position:absolute;left:16px;top:20px;width:8px;height:12px;background:#3a3560;border-radius:5px;"></div>'+
+        '<div style="position:absolute;right:16px;top:20px;width:8px;height:12px;background:#3a3560;border-radius:5px;"></div>'+
+        '<div style="position:absolute;left:12px;top:31px;width:11px;height:7px;background:#FFB8D2;border-radius:50%;opacity:.9;"></div>'+
+        '<div style="position:absolute;right:12px;top:31px;width:11px;height:7px;background:#FFB8D2;border-radius:50%;opacity:.9;"></div>'+
+        '<div style="position:absolute;left:50%;top:26px;transform:translateX(-50%);width:16px;height:9px;border:2.5px solid #3a3560;border-top:none;border-radius:0 0 10px 10px;"></div>'+
+      '</div>';
+  } else if (name === 'pixie'){
+    inner += '<div style="position:absolute;left:50%;bottom:12px;transform:translateX(-50%);width:92px;height:11px;background:linear-gradient(#dfe6fb,#c4d0f2);border:3px solid #B9C7F0;border-radius:6px 6px 10px 10px;"></div>'+
+      '<div style="position:absolute;left:50%;bottom:14px;transform:translateX(-50%);width:26px;height:5px;background:#B9C7F0;border-radius:4px;"></div>'+
+      '<div style="position:absolute;left:50%;top:14px;transform:translateX(-50%);width:80px;height:56px;border-radius:15px;background:linear-gradient(#e9edfb,#d7def5);border:3px solid #B9C7F0;padding:5px;">'+
+        '<div style="position:relative;width:100%;height:100%;border-radius:10px;background:radial-gradient(circle at 50% 32%, #3b3168, #211b41);">'+
+          '<div style="position:absolute;left:15px;top:14px;width:9px;height:13px;background:#63E6DE;border-radius:6px;box-shadow:0 0 6px rgba(99,230,222,.7);"></div>'+
+          '<div style="position:absolute;right:15px;top:14px;width:9px;height:13px;background:#63E6DE;border-radius:6px;box-shadow:0 0 6px rgba(99,230,222,.7);"></div>'+
+          '<div style="position:absolute;left:9px;top:26px;width:10px;height:7px;background:#FF8FBE;border-radius:50%;opacity:.75;"></div>'+
+          '<div style="position:absolute;right:9px;top:26px;width:10px;height:7px;background:#FF8FBE;border-radius:50%;opacity:.75;"></div>'+
+          '<div style="position:absolute;left:50%;bottom:9px;transform:translateX(-50%);width:18px;height:9px;border:2.5px solid #63E6DE;border-top:none;border-radius:0 0 11px 11px;"></div>'+
+        '</div>'+
+      '</div>';
+  } else if (name === 'crayon'){
+    inner += '<div style="position:absolute;left:50%;top:2px;transform:translateX(-50%) rotate(-8deg);transform-origin:50% 100%;">'+
+      '<div style="width:34px;height:16px;background:linear-gradient(#FFC1DA,#FF9EC4);border:3px solid #F080AC;border-radius:9px 9px 4px 4px;margin:0 auto;"></div>'+
+      '<div style="width:34px;height:7px;background:linear-gradient(#e7e7ef,#c9c9d6);border-left:3px solid #F080AC;border-right:3px solid #F080AC;"></div>'+
+      '<div style="position:relative;width:34px;height:52px;background:linear-gradient(#FFE79A,#FFD866);border:3px solid #EFC24E;border-top:none;">'+
+        '<div style="position:absolute;left:6px;top:16px;width:7px;height:11px;background:#3a3560;border-radius:5px;"></div>'+
+        '<div style="position:absolute;right:6px;top:16px;width:7px;height:11px;background:#3a3560;border-radius:5px;"></div>'+
+        '<div style="position:absolute;left:3px;top:27px;width:9px;height:6px;background:#FF9EC4;border-radius:50%;opacity:.9;"></div>'+
+        '<div style="position:absolute;right:3px;top:27px;width:9px;height:6px;background:#FF9EC4;border-radius:50%;opacity:.9;"></div>'+
+        '<div style="position:absolute;left:50%;top:23px;transform:translateX(-50%);width:13px;height:7px;border:2.5px solid #3a3560;border-top:none;border-radius:0 0 9px 9px;"></div>'+
+      '</div>'+
+      '<div style="width:0;height:0;border-left:20px solid transparent;border-right:20px solid transparent;border-top:20px solid #F2D8A0;margin-top:-1px;"></div>'+
+      '<div style="width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-top:12px solid #4a4460;margin:-20px auto 0;"></div>'+
+    '</div>';
+  }
+  var wow = '';
+  if (mood === 'wow'){
+    wow = '<div style="position:absolute;left:-4px;top:2px;width:16px;height:16px;background:#FFD86B;clip-path:polygon(50% 0,61% 39%,100% 50%,61% 61%,50% 100%,39% 61%,0 50%,39% 39%);"></div>'+
+      '<div style="position:absolute;right:-2px;top:8px;width:12px;height:12px;background:#FF6BAA;clip-path:polygon(50% 0,61% 39%,100% 50%,61% 61%,50% 100%,39% 61%,0 50%,39% 39%);"></div>'+
+      '<div style="position:absolute;right:14px;top:-6px;width:10px;height:10px;background:#8ED0FF;clip-path:polygon(50% 0,61% 39%,100% 50%,61% 61%,50% 100%,39% 61%,0 50%,39% 39%);"></div>';
+  }
+  return '<div style="position:relative;width:'+size+'px;height:'+size+'px;display:inline-block;">'+
+    '<div style="position:absolute;top:0;left:0;width:100px;height:100px;transform:scale('+scale+');transform-origin:top left;">'+inner+wow+'</div></div>';
+}
+
+function esc(s){
+  return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+/* ---------- Écrans ---------- */
+
+function renderHome(){
+  var stars = totalStars(), max = totalMax();
+  var pct = Math.round(stars/max*100);
+  var cards = window.__MATIERES__.map(function(m, mIdx){
+    var doneSections = 0;
+    m.sections.forEach(function(sec, sIdx){ if (sectionScore(mIdx,sIdx) >= UNLOCK_THRESHOLD) doneSections++; });
+    return '<button onclick="App.go(\'matiere\','+mIdx+')" class="card" style="display:flex;align-items:center;gap:14px;padding:16px 18px;width:100%;text-align:left;border:3px solid '+m.border+';cursor:pointer;margin-bottom:12px;">'+
+      '<div style="width:54px;height:54px;border-radius:16px;background:'+m.tintSoft+';display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;">'+m.emoji+'</div>'+
+      '<div style="flex:1;">'+
+        '<div class="title-font" style="font-weight:800;font-size:19px;color:var(--ink);">'+m.label+'</div>'+
+        '<div style="font-size:13px;font-weight:700;opacity:.6;margin-top:2px;">'+doneSections+' / '+m.sections.length+' sections réussies</div>'+
+      '</div>'+
+      '<div style="font-size:22px;">→</div>'+
+    '</button>';
+  }).join('');
+
+  return '<div style="text-align:center;padding:8px 0 18px;">'+
+    '<div style="display:inline-block;">'+mascotHTML('leo',96,'happy')+'</div>'+
+    '<div class="title-font" style="font-size:30px;font-weight:800;margin-top:6px;">Le cahier de '+PRENOM+'</div>'+
+    '<div style="font-size:15px;font-weight:700;opacity:.65;margin-top:4px;">Révisions CM1 → objectif CM2 🚀</div>'+
+  '</div>'+
+  '<div class="card" style="padding:18px 20px;margin-bottom:20px;border:3px solid rgba(0,0,0,.06);">'+
+    '<div style="display:flex;justify-content:space-between;font-size:13px;font-weight:800;opacity:.6;margin-bottom:8px;">'+
+      '<span>MA PROGRESSION</span><span>'+stars+' / '+max+' ⭐</span></div>'+
+    '<div style="height:12px;background:#F0E9F7;border-radius:999px;overflow:hidden;">'+
+      '<div style="height:100%;width:'+pct+'%;background:linear-gradient(90deg,#FF7A5C,#4A6FE3);border-radius:999px;transition:width .5s;"></div></div>'+
+  '</div>'+
+  cards+
+  '<div style="display:flex;justify-content:center;gap:10px;margin-top:22px;">'+
+    '<button class="btn top-btn" onclick="App.go(\'trophees\')" style="background:#FFE792;border:3px solid #f4d54f;">🎁 Mes trophées</button>'+
+    '<button class="btn top-btn" onclick="App.resetAll()">↺ Recommencer</button>'+
+  '</div>';
+}
+
+function renderMatiere(mIdx){
+  var m = window.__MATIERES__[mIdx];
+  var sections = m.sections.map(function(sec, sIdx){
+    var unlocked = sectionUnlocked(mIdx, sIdx);
+    var score = sectionScore(mIdx, sIdx);
+    var attempted = sectionAttempted(mIdx, sIdx);
+    var passed = score >= UNLOCK_THRESHOLD;
+    var statusText = !unlocked ? '🔒 verrouillée' : passed ? 'Réussie ✓ ' + score + '/10' : attempted ? 'En cours · ' + score + '/10' : 'À découvrir';
+    var cls = unlocked ? '' : 'lock';
+    var clickable = unlocked ? "App.go('section',"+mIdx+","+sIdx+")" : "";
+    return '<button '+(unlocked ? 'onclick="'+clickable+'"' : 'disabled')+' class="card '+cls+'" style="display:flex;align-items:center;gap:14px;padding:15px 18px;width:100%;text-align:left;border:3px solid '+(passed ? m.border : 'rgba(0,0,0,.06)')+';cursor:'+(unlocked?'pointer':'default')+';margin-bottom:12px;">'+
+      '<div style="width:40px;height:40px;border-radius:12px;background:'+(passed ? m.tintSoft : '#F4F1F7')+';display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;flex-shrink:0;">'+(sIdx+1)+'</div>'+
+      '<div style="flex:1;">'+
+        '<div style="font-weight:800;font-size:16px;">'+esc(sec.title)+'</div>'+
+        '<div style="font-size:13px;font-weight:700;opacity:.6;margin-top:2px;">'+statusText+'</div>'+
+      '</div>'+
+    '</button>';
+  }).join('');
+
+  return topBar('accueil')+
+    '<div style="display:flex;align-items:center;gap:14px;background:'+m.tintSoft+';border:3px solid '+m.border+';border-radius:24px;padding:18px 20px;margin:16px 0;">'+
+      '<div style="width:52px;height:52px;border-radius:16px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:26px;">'+m.emoji+'</div>'+
+      '<div class="title-font" style="font-size:23px;font-weight:800;">'+m.label+'</div>'+
+    '</div>'+
+    sections;
+}
+
+function topBar(view, extra){
+  return '<button class="btn top-btn" onclick="App.go(\''+view+'\''+(extra?','+extra:'')+')">← Retour</button>';
+}
+
+function enrichEx(ex, id){
+  var a = state.answers[id] || {};
+  if (ex.type === 'qcm'){
+    var sel = a.sel == null ? null : a.sel;
+    var status = sel == null ? 'idle' : (sel === ex.correct ? 'correct' : 'wrong');
+    var optsHTML = ex.opts.map(function(label, i){
+      var bg='#fff', bc='#EDE0F4', mark='';
+      var isC = i===ex.correct, isS = i===sel;
+      if (status==='correct' && isC) { bg='#E4F8EE'; bc='#57C495'; mark=' ✓'; }
+      else if (status==='wrong' && isS) { bg='#FFE6EF'; bc='#FF7DAE'; mark=' ✕'; }
+      else if (status==='wrong' && isC) { bg='#EDFAF3'; bc='#8FD8B4'; mark=' ✓'; }
+      return '<button class="opt-btn" style="background:'+bg+';border-color:'+bc+';" onclick="App.answer(\''+id+'\','+i+')">'+esc(label)+mark+'</button>';
+    }).join('');
+    return { body:'<div style="display:grid;gap:10px;">'+optsHTML+'</div>', status:status };
+  }
+  if (ex.type === 'fill'){
+    var sel = a.sel == null ? null : a.sel;
+    var status = sel == null ? 'idle' : (sel === ex.correct ? 'correct' : 'wrong');
+    var blankText = sel == null ? '？' : ex.opts[sel];
+    var blankBc = status==='correct' ? '#57C495' : status==='wrong' ? '#FF7DAE' : '#C9B6E8';
+    var blankBg = status==='correct' ? '#E4F8EE' : status==='wrong' ? '#FFE6EF' : '#F7F1FF';
+    var optsHTML = ex.opts.map(function(label, i){
+      var bg='#fff', bc='#EDE0F4';
+      var isC=i===ex.correct, isS=i===sel;
+      if (status==='correct' && isC){ bg='#E4F8EE'; bc='#57C495'; }
+      else if (status==='wrong' && isS){ bg='#FFE6EF'; bc='#FF7DAE'; }
+      else if (status==='wrong' && isC){ bg='#EDFAF3'; bc='#8FD8B4'; }
+      return '<button class="opt-btn" style="background:'+bg+';border-color:'+bc+';flex:1;text-align:center;" onclick="App.answer(\''+id+'\','+i+')">'+esc(label)+'</button>';
+    }).join('');
+    return { body:
+      '<div class="title-font" style="font-size:19px;font-weight:700;margin-bottom:14px;">'+esc(ex.before)+
+        '<span style="display:inline-block;min-width:46px;text-align:center;border:3px solid '+blankBc+';background:'+blankBg+';border-radius:10px;padding:2px 8px;">'+esc(blankText)+'</span>'+
+        esc(ex.after)+'</div>'+
+      '<div style="display:flex;gap:10px;flex-wrap:wrap;">'+optsHTML+'</div>',
+      status: status };
+  }
+  if (ex.type === 'calc'){
+    var status = a.status || 'idle';
+    var draft = a.draft || '';
+    var inputBc = status==='correct' ? '#57C495' : status==='wrong' ? '#FF7DAE' : '#E3D3EF';
+    return { body:
+      '<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">'+
+        '<input class="answer-input" style="border-color:'+inputBc+';" value="'+esc(draft)+'" placeholder="ta réponse…" '+
+          'oninput="App.setDraft(\''+id+'\',this.value)" onkeydown="if(event.key===\'Enter\')App.checkCalc(\''+id+'\')">'+
+        '<button class="btn" style="background:#BDEFD6;border:3px solid #8fdcb4;border-radius:999px;padding:11px 20px;font-size:15px;" onclick="App.checkCalc(\''+id+'\')">Vérifier ✓</button>'+
+      '</div>',
+      status: status };
+  }
+  return { body:'', status:'idle' };
+}
+
+function renderSection(mIdx, sIdx){
+  var m = window.__MATIERES__[mIdx];
+  var sec = m.sections[sIdx];
+  var score = sectionScore(mIdx, sIdx);
+  var passed = score >= UNLOCK_THRESHOLD;
+  var nextUnlockedNow = false;
+  if (sIdx+1 < m.sections.length) nextUnlockedNow = passed;
+
+  var exercisesHTML = sec.ex.map(function(ex, eIdx){
+    var id = exId(mIdx, sIdx, eIdx);
+    var r = enrichEx(ex, id);
+    var feedback = '';
+    if (r.status === 'correct') feedback = '<div style="margin-top:12px;background:#E4F8EE;border:2px solid #8fdcb4;border-radius:14px;padding:10px 14px;font-weight:800;font-size:14px;color:#2F9E6B;">🎉 Bravo, c\'est exact ! '+(ex.exp?('<span style="font-weight:600;opacity:.85;"> — '+esc(ex.exp)+'</span>'):'')+'</div>';
+    else if (r.status === 'wrong') feedback = '<div style="margin-top:12px;background:#FFE9F1;border:2px solid var(--rose,#FF7DAE);border-radius:14px;padding:10px 14px;font-weight:800;font-size:14px;color:#D24C86;">👀 Pas tout à fait, la bonne réponse est en vert.'+(ex.exp?(' <span style="font-weight:600;opacity:.85;">'+esc(ex.exp)+'</span>'):'')+'</div>';
+    return '<div class="card" style="padding:20px;border:3px solid rgba(0,0,0,.06);margin-bottom:16px;">'+
+      '<div style="display:inline-flex;align-items:center;gap:7px;background:'+m.tintSoft+';border-radius:12px;padding:5px 13px;font-family:\'Baloo 2\',cursive;font-weight:800;font-size:12px;margin-bottom:14px;">EXERCICE '+(eIdx+1)+' / '+sec.ex.length+'</div>'+
+      (ex.type !== 'fill' ? '<div class="title-font" style="font-size:18px;font-weight:700;line-height:1.3;margin-bottom:16px;">'+esc(ex.q)+'</div>' : '')+
+      r.body+feedback+
+    '</div>';
+  }).join('');
+
+  var banner = '';
+  if (passed) {
+    banner = '<div class="card pop" style="padding:18px 20px;margin-bottom:18px;border:3px solid #8fdcb4;background:#EAFBF1;text-align:center;">'+
+      '<div class="title-font" style="font-weight:800;font-size:17px;">🎉 Section réussie ! ('+score+'/10)</div>'+
+      (sIdx+1 < m.sections.length ? '<div style="font-size:14px;font-weight:700;opacity:.75;margin-top:4px;">La section suivante est débloquée.</div>'+
+        '<button class="btn" style="margin-top:10px;background:'+m.tint+';color:#fff;border:none;border-radius:999px;padding:12px 24px;" onclick="App.go(\'section\','+mIdx+','+(sIdx+1)+')">Section suivante →</button>'
+        : '<div style="font-size:14px;font-weight:700;opacity:.75;margin-top:4px;">Tu as fini toutes les sections de '+m.label+' ! 🏆</div>')+
+    '</div>';
+  } else {
+    banner = '<div class="card" style="padding:14px 20px;margin-bottom:18px;border:3px solid '+m.border+';background:'+m.tintSoft+';text-align:center;font-weight:800;font-size:14px;">'+
+      score+' / 10 bonnes réponses · il en faut '+UNLOCK_THRESHOLD+' pour débloquer la section suivante. Tu peux réessayer les exercices !'+
+    '</div>';
+  }
+
+  return topBar('matiere', mIdx)+
+    '<div style="display:flex;align-items:center;gap:14px;background:'+m.tintSoft+';border:3px solid '+m.border+';border-radius:24px;padding:16px 20px;margin:16px 0;">'+
+      '<div style="width:46px;height:46px;border-radius:14px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:22px;">'+m.emoji+'</div>'+
+      '<div><div style="font-size:12px;font-weight:800;opacity:.6;letter-spacing:.04em;">'+m.label.toUpperCase()+'</div>'+
+      '<div class="title-font" style="font-size:19px;font-weight:800;">'+esc(sec.title)+'</div></div>'+
+    '</div>'+
+    banner+
+    exercisesHTML;
+}
+
+function renderTrophees(){
+  var badges = window.__MATIERES__.map(function(m, mIdx){
+    var earned = matiereFullyDone(mIdx);
+    return '<div class="card" style="padding:18px;text-align:center;border:3px solid '+(earned?m.border:'#E7E2EE')+';opacity:'+(earned?1:.55)+';">'+
+      '<div style="font-size:34px;'+(earned?'':'filter:grayscale(1);')+'">'+m.emoji+'</div>'+
+      '<div class="title-font" style="font-weight:800;font-size:14px;margin-top:6px;">'+m.label+'</div>'+
+      '<div style="font-size:12px;font-weight:700;opacity:.7;margin-top:2px;">'+(earned?'Débloqué !':'🔒 à débloquer')+'</div>'+
+    '</div>';
+  }).join('');
+  var champ = window.__MATIERES__.every(function(m,i){ return matiereFullyDone(i); });
+  return topBar('home')+
+    '<div style="text-align:center;margin:18px 0 22px;">'+mascotHTML('leo',90, champ?'wow':'happy')+
+      '<div class="title-font" style="font-size:24px;font-weight:800;margin-top:8px;">Ma collection</div>'+
+      '<div style="font-size:14px;font-weight:700;opacity:.65;">'+(champ?'Tu as tout terminé, bravo !! 🎉':'Continue, tu vas y arriver !')+'</div>'+
+    '</div>'+
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">'+badges+'</div>'+
+    (champ ? '<div class="card pop" style="margin-top:18px;padding:20px;text-align:center;border:3px solid #FFD86B;background:#FFF6DE;">'+
+      '<div style="font-size:38px;">👑</div><div class="title-font" style="font-weight:800;font-size:18px;margin-top:6px;">Championne du CM1 !</div></div>' : '');
+}
+
+function render(){
+  var html = '';
+  if (state.view === 'matiere' && state.matiereId != null) html = renderMatiere(state.matiereId);
+  else if (state.view === 'section' && state.matiereId != null && state.sectionIdx != null) html = renderSection(state.matiereId, state.sectionIdx);
+  else if (state.view === 'trophees') html = renderTrophees();
+  else html = renderHome();
+  document.getElementById('app').innerHTML = html;
+}
+
+/* ---------- API exposée aux onclick ---------- */
+window.App = {
+  go: go,
+  resetAll: resetAll,
+  answer: function(id, i){
+    state.answers[id] = state.answers[id] || {};
+    state.answers[id].sel = i;
+    persist();
+    render();
+  },
+  setDraft: function(id, v){
+    state.answers[id] = state.answers[id] || {};
+    state.answers[id].draft = v;
+    state.answers[id].status = 'idle';
+    persist();
+  },
+  checkCalc: function(id){
+    var parts = id.split('_');
+    var mIdx = parseInt(parts[0].slice(1),10), sIdx = parseInt(parts[1].slice(1),10), eIdx = parseInt(parts[2].slice(1),10);
+    var ex = window.__MATIERES__[mIdx].sections[sIdx].ex[eIdx];
+    var a = state.answers[id] || {};
+    var d = norm(a.draft);
+    if (!d) return;
+    var ok = ex.answers.map(norm).indexOf(d) !== -1;
+    state.answers[id].status = ok ? 'correct' : 'wrong';
+    persist();
+    render();
+  }
+};
+
+render();
+})();
+</script>
+</body>
+</html>
